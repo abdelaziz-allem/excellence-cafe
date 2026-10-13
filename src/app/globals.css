@@ -1,26 +1,151 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+ * Excellence Café — palette drawn from the brand flyer:
+ * warm ivory paper, champagne cream, burnished gold and deep espresso.
+ */
+@theme {
+  --color-ivory: #fbf7ef;
+  --color-cream: #f4ead6;
+  --color-sand: #e9d9b8;
+  --color-gold-50: #fbf3e2;
+  --color-gold-200: #e8cf98;
+  --color-gold-300: #d9b36a;
+  --color-gold: #b8862b;
+  --color-gold-600: #9c6f1f;
+  --color-gold-700: #7d5717;
+  --color-espresso: #241910;
+  --color-roast: #3a2a1b;
+  --color-mocha: #6b5440;
+  --color-latte: #9a8670;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-display: var(--font-playfair), "Times New Roman", serif;
+  --font-serif: var(--font-cormorant), Georgia, serif;
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --animate-fade-up: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-ivory);
+  color: var(--color-roast);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-gold-200);
+  color: var(--color-espresso);
+}
+
+@layer components {
+  /* Burnished-gold lettering, echoing the "20% OFF" type on the flyer */
+  .text-gilded {
+    background: linear-gradient(
+      100deg,
+      #8a5f17 0%,
+      #c8973a 28%,
+      #e9c97f 48%,
+      #b8862b 66%,
+      #7d5717 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--color-gold-600);
+  }
+
+  .btn-gold {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.95rem 2rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--color-ivory);
+    background: var(--color-gold);
+    border: 1px solid var(--color-gold);
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
+  }
+  .btn-gold:hover {
+    background: var(--color-gold-700);
+    border-color: var(--color-gold-700);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.95rem 2rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: currentColor;
+    border: 1px solid currentColor;
+    transition: background 0.3s, color 0.3s;
+  }
+  .btn-outline:hover {
+    background: var(--color-gold);
+    border-color: var(--color-gold);
+    color: var(--color-ivory);
+  }
+
+  /* Double hairline frame used around cards and the hours plaque */
+  .frame-double {
+    position: relative;
+    border: 1px solid color-mix(in srgb, var(--color-gold) 55%, transparent);
+  }
+  .frame-double::after {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid color-mix(in srgb, var(--color-gold) 30%, transparent);
+    pointer-events: none;
+  }
+
+  .paper {
+    background-color: var(--color-ivory);
+    background-image: radial-gradient(
+        circle at 15% 10%,
+        rgba(233, 201, 127, 0.18),
+        transparent 45%
+      ),
+      radial-gradient(circle at 90% 80%, rgba(184, 134, 43, 0.1), transparent 40%);
+  }
+
+  .menu-leader {
+    flex: 1;
+    border-bottom: 1px dotted color-mix(in srgb, var(--color-gold) 60%, transparent);
+    transform: translateY(-0.35em);
+    margin: 0 0.75rem;
+    min-width: 1.5rem;
+  }
 }
