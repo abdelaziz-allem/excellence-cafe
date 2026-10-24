@@ -94,7 +94,7 @@ export function MenuBrowser({ categories }: { categories: PublicMenuCategory[] }
               type="button"
               onClick={() => scrollTabs(-1)}
               aria-label="Previous categories"
-              className="absolute inset-y-0 left-0 flex w-14 items-center justify-start bg-gradient-to-r from-ivory from-50% to-transparent pl-2 text-mocha hover:text-gold-600"
+              className="absolute inset-y-0 left-0 hidden lg:flex w-14 items-center justify-start bg-gradient-to-r from-ivory from-50% to-transparent pl-2 text-mocha hover:text-gold-600"
             >
               <ChevronIcon className="h-5 w-5 rotate-180" />
             </button>
@@ -104,7 +104,7 @@ export function MenuBrowser({ categories }: { categories: PublicMenuCategory[] }
               type="button"
               onClick={() => scrollTabs(1)}
               aria-label="More categories"
-              className="absolute inset-y-0 right-0 flex w-14 items-center justify-end bg-gradient-to-l from-ivory from-50% to-transparent pr-2 text-mocha hover:text-gold-600"
+              className="absolute inset-y-0 right-0 hidden lg:flex w-14 items-center justify-end bg-gradient-to-l from-ivory from-50% to-transparent pr-2 text-mocha hover:text-gold-600"
             >
               <ChevronIcon className="h-5 w-5" />
             </button>
