@@ -17,7 +17,7 @@ export function Footer() {
       <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[60rem] -translate-x-1/2 rounded-full bg-gold/10 blur-3xl" />
       <div className="relative mx-auto max-w-7xl px-6 pt-20 pb-10">
         <div className="flex flex-col items-center text-center">
-          <Logo light />
+          <Logo className="h-28" />
           <p className="mt-6 max-w-md font-serif text-xl italic text-cream/70">
             “{site.tagline}.”
           </p>

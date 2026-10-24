@@ -18,7 +18,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
       <aside className="bg-espresso text-cream md:sticky md:top-0 md:flex md:h-screen md:w-60 md:shrink-0 md:flex-col">
         <div className="flex items-center justify-between gap-3 px-5 py-4 md:block md:py-6">
           <Link href="/dashboard" className="flex items-center gap-3 text-gold-200">
-            <LogoMark className="h-7 w-9" />
+            <LogoMark className="h-7 w-auto" />
             <span>
               <span className="block font-display text-lg leading-tight text-ivory">
                 Excellence Café

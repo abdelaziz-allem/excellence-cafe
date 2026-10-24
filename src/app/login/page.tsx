@@ -15,7 +15,7 @@ export default async function LoginPage({
     <main className="flex min-h-screen items-center justify-center bg-espresso px-4 py-16">
       <div className="w-full max-w-sm">
         <div className="text-center text-gold-200">
-          <LogoMark className="mx-auto h-12 w-16" />
+          <LogoMark className="mx-auto h-14 w-auto" />
           <p className="mt-4 font-display text-2xl text-ivory">Excellence Café</p>
           <p className="mt-1 text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-gold-300">
             Dashboard
