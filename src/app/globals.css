@@ -19,11 +19,17 @@
   --color-mocha: #6b5440;
   --color-latte: #9a8670;
 
-  --font-display: var(--font-playfair), "Times New Roman", serif;
-  --font-serif: var(--font-cormorant), Georgia, serif;
+  --font-display: var(--font-fraunces), "Times New Roman", serif;
+  --font-serif: var(--font-lora), Georgia, serif;
   --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
 
   --animate-fade-up: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-ken-burns: ken-burns 18s ease-out both;
+  --animate-reveal-up: reveal-up 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-draw-line: draw-line 1s cubic-bezier(0.65, 0, 0.35, 1) both;
+  --animate-spin-in: spin-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-shimmer: shimmer 6s linear infinite;
+  --animate-scroll-cue: scroll-cue 2.2s ease-in-out infinite;
 
   @keyframes fade-up {
     from {
@@ -35,6 +41,76 @@
       transform: translateY(0);
     }
   }
+
+  /* Slow push-in on the hero photograph */
+  @keyframes ken-burns {
+    from {
+      transform: scale(1.15);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  /* Text rises out of an overflow-hidden line mask */
+  @keyframes reveal-up {
+    from {
+      transform: translateY(110%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes draw-line {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @keyframes spin-in {
+    from {
+      opacity: 0;
+      transform: rotate(-135deg) scale(0);
+    }
+    to {
+      opacity: 1;
+      transform: rotate(45deg) scale(1);
+    }
+  }
+
+  @keyframes shimmer {
+    from {
+      background-position: 0% 50%;
+    }
+    to {
+      background-position: 200% 50%;
+    }
+  }
+
+  @keyframes scroll-cue {
+    0%,
+    100% {
+      opacity: 0.3;
+      transform: translateY(0);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(8px);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
 
 html {
@@ -45,7 +121,17 @@ body {
   background: var(--color-ivory);
   color: var(--color-roast);
   font-family: var(--font-sans);
+  font-weight: 500;
   -webkit-font-smoothing: antialiased;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 600;
+  }
 }
 
 ::selection {
@@ -69,11 +155,27 @@ body {
     color: transparent;
   }
 
+  /* Moving gold highlight across hero lettering */
+  .text-shimmer {
+    background: linear-gradient(
+      100deg,
+      var(--color-gold-200) 0%,
+      var(--color-gold-200) 35%,
+      #fff4d6 50%,
+      var(--color-gold-200) 65%,
+      var(--color-gold-200) 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
   .eyebrow {
     font-family: var(--font-sans);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.32em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--color-gold-600);
   }
@@ -85,8 +187,8 @@ body {
     gap: 0.6rem;
     padding: 0.95rem 2rem;
     font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.28em;
+    font-weight: 700;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
     color: var(--color-ivory);
     background: var(--color-gold);
@@ -105,8 +207,8 @@ body {
     gap: 0.6rem;
     padding: 0.95rem 2rem;
     font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.28em;
+    font-weight: 700;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
     color: currentColor;
     border: 1px solid currentColor;

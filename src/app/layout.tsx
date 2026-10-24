@@ -1,25 +1,25 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Montserrat, Playfair_Display } from "next/font/google";
+import { Fraunces, Lora, Montserrat } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import "./globals.css";
 
-const playfair = Playfair_Display({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-fraunces",
   style: ["normal", "italic"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["500", "600", "700", "800"],
 });
-const cormorant = Cormorant_Garamond({
+const lora = Lora({
   subsets: ["latin"],
-  variable: "--font-cormorant",
+  variable: "--font-lora",
   style: ["normal", "italic"],
   weight: ["400", "500", "600"],
 });
 const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
-  weight: ["400", "500", "600"],
+  weight: ["500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -35,7 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${cormorant.variable} ${montserrat.variable}`}
+      className={`${fraunces.variable} ${lora.variable} ${montserrat.variable}`}
     >
       <body>
         <Header />

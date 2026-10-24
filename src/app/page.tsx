@@ -27,30 +27,36 @@ export default function Home() {
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-55"
+          className="animate-ken-burns object-cover opacity-55"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-espresso/90 via-espresso/50 to-espresso/20" />
         <div className="absolute inset-0 bg-gradient-to-t from-espresso/80 via-transparent to-transparent" />
 
         <div className="relative mx-auto w-full max-w-7xl px-6 pt-36 pb-40">
           <div className="max-w-2xl">
-            <p className="eyebrow animate-fade-up !text-gold-300">
+            <p className="eyebrow animate-fade-up !text-gold-300 [animation-delay:200ms]">
               Café &amp; Restaurant · Hargeisa
             </p>
-            <h1 className="mt-6 animate-fade-up font-display text-6xl leading-[0.95] text-ivory [animation-delay:100ms] sm:text-7xl md:text-8xl">
-              The Art of
-              <span className="mt-2 block italic text-gold-200">Excellence</span>
+            <h1 className="mt-6 font-display text-6xl leading-[1] font-bold tracking-tight text-ivory sm:text-7xl md:text-8xl">
+              <span className="block overflow-hidden pb-1">
+                <span className="block animate-reveal-up [animation-delay:350ms]">The Art of</span>
+              </span>
+              <span className="block overflow-hidden pb-2">
+                <span className="text-shimmer block italic [animation:reveal-up_1.1s_cubic-bezier(0.22,1,0.36,1)_500ms_both,shimmer_6s_linear_1.6s_infinite]">
+                  Excellence
+                </span>
+              </span>
             </h1>
-            <div className="mt-8 flex animate-fade-up items-center gap-3 [animation-delay:200ms]">
-              <span className="h-px w-16 bg-gold" />
-              <span className="h-2 w-2 rotate-45 bg-gold" />
+            <div className="mt-8 flex items-center gap-3">
+              <span className="h-px w-16 origin-left animate-draw-line bg-gold [animation-delay:900ms]" />
+              <span className="h-2 w-2 animate-spin-in bg-gold [animation-delay:1500ms]" />
             </div>
-            <p className="mt-8 max-w-lg animate-fade-up font-serif text-2xl leading-relaxed text-cream/85 [animation-delay:300ms]">
+            <p className="mt-8 max-w-lg animate-fade-up font-serif text-xl leading-relaxed font-medium text-cream sm:text-2xl [animation-delay:1000ms]">
               From the first cup of shaah at sunrise to a candlelit dinner at
               midnight — classic hospitality, honest food and the finest coffee
               in Jig-jiga Yar.
             </p>
-            <div className="mt-10 flex animate-fade-up flex-wrap gap-4 [animation-delay:400ms]">
+            <div className="mt-10 flex animate-fade-up flex-wrap gap-4 [animation-delay:1200ms]">
               <Link href="/menu" className="btn-gold">
                 Discover the Menu
               </Link>
@@ -61,8 +67,14 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Scroll cue */}
+        <div className="absolute bottom-32 left-1/2 hidden -translate-x-1/2 animate-fade-up flex-col items-center gap-2 text-gold-300 [animation-delay:1800ms] md:flex">
+          <span className="text-[0.6rem] font-bold uppercase tracking-[0.35em]">Scroll</span>
+          <span className="h-8 w-px animate-scroll-cue bg-gold-300" />
+        </div>
+
         {/* Info plaque */}
-        <div className="absolute inset-x-0 bottom-0 hidden md:block">
+        <div className="absolute inset-x-0 bottom-0 hidden animate-fade-up [animation-delay:1400ms] md:block">
           <div className="mx-auto grid max-w-7xl grid-cols-3 border-t border-gold/25 px-6 text-cream/85">
             {[
               {
@@ -79,10 +91,10 @@ export default function Home() {
               >
                 <Icon className="h-6 w-6 text-gold-300" />
                 <div>
-                  <p className="text-[0.65rem] uppercase tracking-[0.3em] text-gold-300">
+                  <p className="text-[0.68rem] font-bold uppercase tracking-[0.28em] text-gold-300">
                     {label}
                   </p>
-                  <p className="mt-1 font-display text-lg text-ivory">{value}</p>
+                  <p className="mt-1 font-display text-lg font-semibold text-ivory">{value}</p>
                 </div>
               </div>
             ))}
