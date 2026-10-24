@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { itemPrice, type PublicMenuCategory } from "@/lib/menu";
+import { FullMenuDialog } from "./FullMenuDialog";
 import { Ornament } from "./Ornament";
 import { ChevronIcon, ClockIcon } from "./Icons";
 
@@ -182,6 +183,8 @@ export function MenuBrowser({ categories }: { categories: PublicMenuCategory[] }
           dietary requirements — we are always happy to help.
         </p>
       </div>
+
+      <FullMenuDialog />
     </>
   );
 }

@@ -68,3 +68,14 @@ export const ChevronIcon = ({ className }: P) => (
     <path d="m9 6 6 6-6 6" />
   </svg>
 );
+export const BookIcon = ({ className }: P) => (
+  <svg viewBox="0 0 24 24" className={className} {...base}>
+    <path d="M12 6.5C10 5 7 4.5 3 5v13c4-.5 7 0 9 1.5 2-1.5 5-2 9-1.5V5c-4-.5-7 0-9 1.5Z" />
+    <path d="M12 6.5v13" />
+  </svg>
+);
+export const CloseIcon = ({ className }: P) => (
+  <svg viewBox="0 0 24 24" className={className} {...base}>
+    <path d="M6 6l12 12M18 6 6 18" />
+  </svg>
+);
