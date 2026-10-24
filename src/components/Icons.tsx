@@ -63,3 +63,8 @@ export const WhatsAppIcon = ({ className }: P) => (
     <path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.8-1.8l.8-1-1-2Z" />
   </svg>
 );
+export const ChevronIcon = ({ className }: P) => (
+  <svg viewBox="0 0 24 24" className={className} {...base}>
+    <path d="m9 6 6 6-6 6" />
+  </svg>
+);

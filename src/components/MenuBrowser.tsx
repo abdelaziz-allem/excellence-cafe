@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { itemPrice, type PublicMenuCategory } from "@/lib/menu";
 import { Ornament } from "./Ornament";
-import { ClockIcon } from "./Icons";
+import { ChevronIcon, ClockIcon } from "./Icons";
 
 export function MenuBrowser({ categories }: { categories: PublicMenuCategory[] }) {
   const [active, setActive] = useState(categories[0]?.id ?? "");
@@ -27,7 +27,32 @@ export function MenuBrowser({ categories }: { categories: PublicMenuCategory[] }
     return () => observer.disconnect();
   }, [categories]);
 
-  // Keep the active tab visible in the horizontally scrolling bar on mobile
+  // Show an arrow on each side that has tabs scrolled out of view
+  const [canScroll, setCanScroll] = useState({ left: false, right: false });
+  const updateArrows = useCallback(() => {
+    const el = tabsRef.current;
+    if (!el) return;
+    setCanScroll({
+      left: el.scrollLeft > 1,
+      right: el.scrollLeft + el.clientWidth < el.scrollWidth - 1,
+    });
+  }, []);
+
+  useEffect(() => {
+    const el = tabsRef.current;
+    if (!el) return;
+    updateArrows();
+    const observer = new ResizeObserver(updateArrows);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [updateArrows]);
+
+  const scrollTabs = (dir: 1 | -1) => {
+    const el = tabsRef.current;
+    el?.scrollBy({ left: dir * el.clientWidth * 0.7, behavior: "smooth" });
+  };
+
+  // Keep the active tab visible in the horizontally scrolling bar
   useEffect(() => {
     const tab = tabsRef.current?.querySelector<HTMLElement>(`[data-id="${active}"]`);
     tab?.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
@@ -36,27 +61,54 @@ export function MenuBrowser({ categories }: { categories: PublicMenuCategory[] }
   return (
     <>
       <div className="sticky top-20 z-30 border-y border-gold/25 bg-ivory/95 backdrop-blur">
-        <div
-          ref={tabsRef}
-          className="mx-auto flex max-w-7xl gap-1 overflow-x-auto px-4 [scrollbar-width:none] md:justify-center"
-        >
-          {categories.map((c) => (
-            <a
-              key={c.id}
-              data-id={c.id}
-              href={`#${c.id}`}
-              className={`relative shrink-0 px-5 py-5 text-[0.7rem] font-semibold uppercase tracking-[0.24em] transition-colors ${
-                active === c.id ? "text-gold-600" : "text-mocha hover:text-gold-600"
-              }`}
+        <div className="relative mx-auto max-w-7xl">
+          <div
+            ref={tabsRef}
+            onScroll={updateArrows}
+            className="flex overflow-x-auto px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {/* mx-auto centres the tabs when they all fit, without clipping the start when they don't */}
+            <div className="mx-auto flex gap-1">
+              {categories.map((c) => (
+                <a
+                  key={c.id}
+                  data-id={c.id}
+                  href={`#${c.id}`}
+                  className={`relative shrink-0 px-5 py-5 text-[0.7rem] font-semibold uppercase tracking-[0.24em] transition-colors ${
+                    active === c.id ? "text-gold-600" : "text-mocha hover:text-gold-600"
+                  }`}
+                >
+                  {c.title}
+                  <span
+                    className={`absolute inset-x-5 bottom-0 h-0.5 bg-gold transition-transform duration-300 ${
+                      active === c.id ? "scale-x-100" : "scale-x-0"
+                    }`}
+                  />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {canScroll.left && (
+            <button
+              type="button"
+              onClick={() => scrollTabs(-1)}
+              aria-label="Previous categories"
+              className="absolute inset-y-0 left-0 flex w-14 items-center justify-start bg-gradient-to-r from-ivory from-50% to-transparent pl-2 text-mocha hover:text-gold-600"
             >
-              {c.title}
-              <span
-                className={`absolute inset-x-5 bottom-0 h-0.5 bg-gold transition-transform duration-300 ${
-                  active === c.id ? "scale-x-100" : "scale-x-0"
-                }`}
-              />
-            </a>
-          ))}
+              <ChevronIcon className="h-5 w-5 rotate-180" />
+            </button>
+          )}
+          {canScroll.right && (
+            <button
+              type="button"
+              onClick={() => scrollTabs(1)}
+              aria-label="More categories"
+              className="absolute inset-y-0 right-0 flex w-14 items-center justify-end bg-gradient-to-l from-ivory from-50% to-transparent pr-2 text-mocha hover:text-gold-600"
+            >
+              <ChevronIcon className="h-5 w-5" />
+            </button>
+          )}
         </div>
       </div>
 

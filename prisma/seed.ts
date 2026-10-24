@@ -29,6 +29,16 @@ const extras: Record<string, { subtitle?: string; note?: string }> = {
   Dessert: { subtitle: "Made in-house daily" },
 };
 
+// Top-level groups in menu.json that are drinks; they go after the food
+const drinks = new Set([
+  "Fresh Juices",
+  "Mojitos",
+  "Milkshakes",
+  "Smoothies",
+  "Healthy Booster",
+  "Coffee & Tea",
+]);
+
 // Words that should stay upper case when title-casing the printed menu
 const keepUpper = new Set(["BBQ", "4PCS", "2PCS"]);
 
@@ -64,13 +74,17 @@ async function seedAdmin() {
 
 async function seedMenu() {
   // Flatten nested groups ("Coffee & Tea" → Iced Coffee, Hot Coffee, …)
-  const categories: [string, RawItem[]][] = [];
+  // and list drinks last
+  const food: [string, RawItem[]][] = [];
+  const drink: [string, RawItem[]][] = [];
   for (const [name, value] of Object.entries(data.menu)) {
-    if (Array.isArray(value)) categories.push([name, value as RawItem[]]);
+    const list = drinks.has(name) ? drink : food;
+    if (Array.isArray(value)) list.push([name, value as RawItem[]]);
     else
       for (const [sub, items] of Object.entries(value))
-        categories.push([sub, items as RawItem[]]);
+        list.push([sub, items as RawItem[]]);
   }
+  const categories = [...food, ...drink];
 
   await prisma.category.deleteMany();
 
