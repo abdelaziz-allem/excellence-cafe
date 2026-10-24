@@ -251,3 +251,62 @@ body {
     min-width: 1.5rem;
   }
 }
+
+/* Dashboard form controls */
+@layer components {
+  .dash-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-mocha);
+  }
+  .dash-input {
+    display: block;
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.95rem;
+    color: var(--color-espresso);
+    background: #fff;
+    border: 1px solid var(--color-sand);
+    border-radius: 0.375rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .dash-input:focus {
+    outline: none;
+    border-color: var(--color-gold);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-gold) 20%, transparent);
+  }
+  .dash-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 0.375rem;
+    border: 1px solid var(--color-sand);
+    background: #fff;
+    color: var(--color-roast);
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+  }
+  .dash-btn:hover {
+    border-color: var(--color-gold-300);
+    background: var(--color-gold-50);
+  }
+  .dash-btn-primary {
+    background: var(--color-gold);
+    border-color: var(--color-gold);
+    color: var(--color-ivory);
+  }
+  .dash-btn-primary:hover {
+    background: var(--color-gold-700);
+    border-color: var(--color-gold-700);
+    color: var(--color-ivory);
+  }
+  .dash-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}

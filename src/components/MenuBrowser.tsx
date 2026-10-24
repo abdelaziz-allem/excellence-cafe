@@ -2,19 +2,12 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { formatPrice, type MenuCategory } from "@/lib/data";
+import { itemPrice, type PublicMenuCategory } from "@/lib/menu";
 import { Ornament } from "./Ornament";
 import { ClockIcon } from "./Icons";
 
-const tagLabel: Record<string, string> = {
-  signature: "Chef's signature",
-  new: "New",
-  vegetarian: "Vegetarian",
-  spicy: "Spicy",
-};
-
-export function MenuBrowser({ categories }: { categories: MenuCategory[] }) {
-  const [active, setActive] = useState(categories[0].id);
+export function MenuBrowser({ categories }: { categories: PublicMenuCategory[] }) {
+  const [active, setActive] = useState(categories[0]?.id ?? "");
   const tabsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -92,7 +85,7 @@ export function MenuBrowser({ categories }: { categories: MenuCategory[] }) {
 
               <ul className="mt-16 grid gap-x-16 gap-y-10 md:grid-cols-2">
                 {cat.items.map((item) => (
-                  <li key={item.name} className="flex gap-5">
+                  <li key={item.id} className="flex gap-5">
                     {item.image && (
                       <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-full border-2 border-gold/40 p-1">
                         <div className="relative h-full w-full overflow-hidden rounded-full">
@@ -111,27 +104,18 @@ export function MenuBrowser({ categories }: { categories: MenuCategory[] }) {
                         <h3 className="font-display text-xl text-espresso">{item.name}</h3>
                         <span className="menu-leader" />
                         <span className="font-display text-xl text-gold-600">
-                          {formatPrice(item.price)}
+                          {itemPrice(item)}
                         </span>
                       </div>
-                      <p className="mt-1.5 font-serif text-lg leading-snug text-mocha">
-                        {item.description}
-                      </p>
-                      {item.tags && (
-                        <div className="mt-2.5 flex flex-wrap gap-2">
-                          {item.tags.map((t) => (
-                            <span
-                              key={t}
-                              className={`px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.2em] ${
-                                t === "signature"
-                                  ? "bg-gold text-ivory"
-                                  : "border border-gold/40 text-gold-700"
-                              }`}
-                            >
-                              {tagLabel[t]}
-                            </span>
-                          ))}
-                        </div>
+                      {item.variants.length > 0 && (
+                        <p className="mt-1 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-latte">
+                          {item.variants.map((v) => v.name).join(" / ")}
+                        </p>
+                      )}
+                      {item.description && (
+                        <p className="mt-1.5 font-serif text-lg leading-snug text-mocha">
+                          {item.description}
+                        </p>
                       )}
                     </div>
                   </li>

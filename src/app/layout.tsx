@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Fraunces, Lora, Montserrat } from "next/font/google";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -37,11 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${fraunces.variable} ${lora.variable} ${montserrat.variable}`}
     >
-      <body>
-        <Header />
-        <main>{children}</main>
-        <Footer />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

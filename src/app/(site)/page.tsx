@@ -4,19 +4,21 @@ import {
   formatPrice,
   gallery,
   images,
-  menu,
   signatureDishes,
   site,
   testimonials,
 } from "@/lib/data";
+import { getPublicMenu } from "@/lib/server/menu";
+import { itemPrice } from "@/lib/menu";
 import { Ornament, SectionHeading } from "@/components/Ornament";
 import { ArrowIcon, ClockIcon, PhoneIcon, PinIcon, StarIcon } from "@/components/Icons";
 
-const previewCategories = ["breakfast", "coffee"]
-  .map((id) => menu.find((c) => c.id === id)!)
-  .map((c) => ({ ...c, items: c.items.slice(0, 5) }));
+export default async function Home() {
+  const menu = await getPublicMenu();
+  const previewCategories = ["breakfast", "hot-coffee"]
+    .flatMap((id) => menu.find((c) => c.id === id) ?? [])
+    .map((c) => ({ ...c, items: c.items.slice(0, 5) }));
 
-export default function Home() {
   return (
     <>
       {/* ───────────── Hero ───────────── */}
@@ -290,17 +292,19 @@ export default function Home() {
                 </p>
                 <ul className="mt-10 space-y-7">
                   {cat.items.map((item) => (
-                    <li key={item.name}>
+                    <li key={item.id}>
                       <div className="flex items-baseline">
                         <span className="font-display text-lg text-ivory">{item.name}</span>
                         <span className="menu-leader" />
                         <span className="font-display text-lg text-gold-200">
-                          {formatPrice(item.price)}
+                          {itemPrice(item)}
                         </span>
                       </div>
-                      <p className="mt-1 pr-16 font-serif text-base text-cream/60">
-                        {item.description}
-                      </p>
+                      {item.description && (
+                        <p className="mt-1 pr-16 font-serif text-base text-cream/60">
+                          {item.description}
+                        </p>
+                      )}
                     </li>
                   ))}
                 </ul>

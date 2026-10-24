@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { images, menu } from "@/lib/data";
+import { images } from "@/lib/data";
+import { getPublicMenu } from "@/lib/server/menu";
 import { PageHero } from "@/components/PageHero";
 import { MenuBrowser } from "@/components/MenuBrowser";
 
@@ -8,7 +9,9 @@ export const metadata: Metadata = {
   description: "Breakfast, grills, burgers, salads, specialty coffee, fresh juices and desserts.",
 };
 
-export default function MenuPage() {
+export default async function MenuPage() {
+  const menu = await getPublicMenu();
+
   return (
     <>
       <PageHero

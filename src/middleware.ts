@@ -1,0 +1,19 @@
+import { NextResponse, type NextRequest } from "next/server";
+import { SESSION_COOKIE, decrypt } from "@/lib/server/token";
+
+export async function middleware(req: NextRequest) {
+  const session = await decrypt(req.cookies.get(SESSION_COOKIE)?.value);
+  const { pathname } = req.nextUrl;
+
+  if (pathname.startsWith("/dashboard") && !session) {
+    const url = new URL("/login", req.url);
+    url.searchParams.set("from", pathname);
+    return NextResponse.redirect(url);
+  }
+  if (pathname === "/login" && session) {
+    return NextResponse.redirect(new URL("/dashboard", req.url));
+  }
+  return NextResponse.next();
+}
+
+export const config = { matcher: ["/dashboard/:path*", "/login"] };

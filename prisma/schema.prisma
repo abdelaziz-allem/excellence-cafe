@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique @db.VarChar(255)
+  password  String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id        String     @id @default(uuid())
+  name      String
+  // Anchor on the public menu page, e.g. /menu#breakfast
+  slug      String     @unique
+  subtitle  String?
+  note      String?
+  sortOrder Int        @default(0)
+  items     MenuItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model MenuItem {
+  id          String            @id @default(uuid())
+  name        String
+  description String?
+  // Null when the item is only sold in variants (e.g. Single / Double)
+  price       Decimal?          @db.Decimal(10, 2)
+  image       String?
+  available   Boolean           @default(true)
+  sortOrder   Int               @default(0)
+  categoryId  String
+  category    Category          @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  variants    MenuItemVariant[]
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@index([categoryId])
+}
+
+model MenuItemVariant {
+  id         String   @id @default(uuid())
+  name       String
+  price      Decimal  @db.Decimal(10, 2)
+  sortOrder  Int      @default(0)
+  menuItemId String
+  menuItem   MenuItem @relation(fields: [menuItemId], references: [id], onDelete: Cascade)
+
+  @@index([menuItemId])
+}
