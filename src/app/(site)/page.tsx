@@ -186,47 +186,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ───────────── Breakfast Deal ───────────── */}
-      <section className="bg-cream">
-        <div className="mx-auto grid max-w-7xl lg:grid-cols-[1fr_1.3fr]">
-          <div className="relative flex flex-col justify-center overflow-hidden px-6 py-20 sm:px-12 lg:py-28">
-            <div className="pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 rounded-full border-[18px] border-gold/15" />
-            <div className="pointer-events-none absolute -bottom-20 -left-40 h-96 w-96 rounded-full border border-gold/30" />
-            <p className="eyebrow relative">Every morning</p>
-            <h2 className="relative mt-4 font-display text-4xl font-bold uppercase tracking-tight text-gold-600 md:text-5xl">
-              Breakfast Deal
-            </h2>
-            <Ornament className="relative mt-6 !justify-start" width="w-24" />
-            <p className="relative mt-6 font-display text-[7rem] leading-[0.85] text-gilded md:text-[9rem]">
-              20<span className="text-[0.6em]">%</span>
-            </p>
-            <p className="relative font-display text-6xl tracking-wide text-gilded md:text-7xl">
-              OFF
-            </p>
-            <p className="relative mt-4 text-sm font-semibold uppercase tracking-[0.3em] text-roast">
-              The entire breakfast menu
-            </p>
-            <div className="relative mt-8 inline-flex w-fit items-center gap-3 rounded-full border border-gold/50 px-6 py-3 text-roast">
-              <ClockIcon className="h-5 w-5 text-gold-600" />
-              <span className="font-medium tracking-wide">7:30 AM – 9:30 AM</span>
-            </div>
-            <Link href="/menu#breakfast" className="btn-gold relative mt-10 w-fit">
-              See breakfast menu
-            </Link>
-          </div>
-          <div className="relative min-h-[24rem] lg:min-h-full">
-            <Image
-              src={images.breakfastDeal}
-              alt="Breakfast spread at Excellence Café"
-              fill
-              sizes="(min-width: 1024px) 55vw, 100vw"
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-cream/40 via-transparent to-transparent" />
-          </div>
-        </div>
-      </section>
-
       {/* ───────────── Signature dishes (hidden for now) ───────────── */}
       {SHOW_SIGNATURE_DISHES && (
       <section className="paper py-28 md:py-36">

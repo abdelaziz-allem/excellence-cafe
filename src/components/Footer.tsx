@@ -46,9 +46,6 @@ export function Footer() {
                 {site.hours.open} – {site.hours.close}
               </span>
             </p>
-            <p className="mt-3 pl-7 text-xs text-gold-200/80">
-              Breakfast deal · 7:30 – 9:30 AM
-            </p>
           </div>
           <div>
             <h3 className="eyebrow !text-gold-300">Contact</h3>

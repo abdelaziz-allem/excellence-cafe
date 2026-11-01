@@ -23,7 +23,6 @@ export default function ContactPage() {
       Icon: ClockIcon,
       title: "Opening hours",
       lines: [site.hours.label, `${site.hours.open} – ${site.hours.close}`],
-      sub: "Breakfast deal 7:30 – 9:30 AM",
     },
     {
       Icon: PhoneIcon,
@@ -66,7 +65,7 @@ export default function ContactPage() {
                     <p key={l}>{l}</p>
                   ))}
                 </div>
-                <p className="mt-2 text-xs text-latte">{sub}</p>
+                {sub && <p className="mt-2 text-xs text-latte">{sub}</p>}
                 {href && (
                   <a
                     href={href}
