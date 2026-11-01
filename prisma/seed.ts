@@ -16,10 +16,6 @@ type RawItem = {
 
 // Subtitles and notes carried over from the original static menu
 const extras: Record<string, { subtitle?: string; note?: string }> = {
-  Breakfast: {
-    subtitle: "Served daily 7:30 – 11:30 AM",
-    note: "20% off the entire breakfast menu between 7:30 and 9:30 AM",
-  },
   "Main Courses": { subtitle: "From the grill and the kitchen" },
   Burgers: { subtitle: "Flame-grilled to order" },
   Pizza: { subtitle: "Stone-baked" },
