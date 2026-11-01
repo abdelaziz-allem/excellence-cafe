@@ -13,6 +13,9 @@ import { itemPrice } from "@/lib/menu";
 import { Ornament, SectionHeading } from "@/components/Ornament";
 import { ArrowIcon, ClockIcon, PhoneIcon, PinIcon, StarIcon } from "@/components/Icons";
 
+// Set to true to show the "Signature Creations" section on the homepage again
+const SHOW_SIGNATURE_DISHES = false;
+
 export default async function Home() {
   const menu = await getPublicMenu();
   const previewCategories = ["breakfast", "hot-coffee"]
@@ -224,7 +227,8 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ───────────── Signature dishes ───────────── */}
+      {/* ───────────── Signature dishes (hidden for now) ───────────── */}
+      {SHOW_SIGNATURE_DISHES && (
       <section className="paper py-28 md:py-36">
         <div className="mx-auto max-w-7xl px-6">
           <SectionHeading
@@ -261,6 +265,7 @@ export default async function Home() {
           </div>
         </div>
       </section>
+      )}
 
       {/* ───────────── Menu preview ───────────── */}
       <section className="relative overflow-hidden bg-espresso py-28 text-cream md:py-36">
