@@ -298,7 +298,7 @@ export default async function Home() {
           <div className="mt-20 grid gap-8 md:grid-cols-3">
             {[
               {
-                img: images.chef,
+                img: images.chefPrep,
                 title: "Our Kitchen",
                 text: "Recipes passed down and refined — cooked fresh to order, from sunrise breakfasts to the late-night grill.",
               },
